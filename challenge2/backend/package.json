@@ -1,0 +1,22 @@
+{
+  "name": "infinite-loop-backend",
+  "version": "1.0.0",
+  "description": "Backend with infinite loop bugs for debugging challenge",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^6.1.5",
+    "express-rate-limit": "^6.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "keywords": ["challenge", "debugging", "infinite-loop"],
+  "author": "Bug Challenge Team",
+  "license": "MIT"
+}
