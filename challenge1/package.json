@@ -1,0 +1,19 @@
+{
+  "name": "phantom-package-challenge",
+  "version": "1.0.0",
+  "description": "Bug challenge: Package integrity issues",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "axios": "^1.4.0"
+  },
+  "keywords": ["challenge", "debugging", "nodejs"],
+  "author": "Bug Challenge Team",
+  "license": "MIT"
+}

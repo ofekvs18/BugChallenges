@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantom Package Challenge</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .status-card {
+            background: #f8f9fa;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .error-card {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #dee2e6;
+        }
+        .challenge-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐛 Challenge 1: The Phantom Package</h1>
+        
+        <div class="challenge-info">
+            <h3>🎯 Your Mission:</h3>
+            <p>This Node.js application fails to start due to package integrity errors. Your task is to identify and fix the corrupted package hashes so the application can run successfully.</p>
+            <p><strong>Hint:</strong> Check the package-lock.json file for integrity issues!</p>
+        </div>
+
+        <div class="status-card" id="appStatus">
+            <h3>📊 Application Status</h3>
+            <p>If you can see this page, you've made progress! Now test the API endpoints below.</p>
+        </div>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <button onclick="checkStatus()">🔍 Check Status</button>
+            <button onclick="fetchData()">📊 Get Data</button>
+            <button onclick="testExternal()">🌐 Test External API</button>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+        function showResult(title, data, isError = false) {
+            const results = document.getElementById('results');
+            const cardClass = isError ? 'error-card' : 'status-card';
+            results.innerHTML = `
+                <div class="${cardClass}">
+                    <h3>${title}</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                </div>
+            `;
+        }
+
+        function showLoading(button) {
+            button.classList.add('loading');
+            button.textContent = 'Loading...';
+        }
+
+        function resetButton(button, originalText) {
+            button.classList.remove('loading');
+            button.textContent = originalText;
+        }
+
+        async function checkStatus() {
+            const button = event.target;
+            const originalText = button.textContent;
+            showLoading(button);
+
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                showResult('✅ Status Check Result', data);
+            } catch (error) {
+                showResult('❌ Status Check Failed', { error: error.message }, true);
+            } finally {
+                resetButton(button, originalText);
+            }
+        }
+
+        async function fetchData() {
+            const button = event.target;
+            const originalText = button.textContent;
+            showLoading(button);
+
+            try {
+                const response = await fetch('/api/data');
+                const data = await response.json();
+                showResult('📊 Data Processing Result', data);
+            } catch (error) {
+                showResult('❌ Data Fetch Failed', { error: error.message }, true);
+            } finally {
+                resetButton(button, originalText);
+            }
+        }
+
+        async function testExternal() {
+            const button = event.target;
+            const originalText = button.textContent;
+            showLoading(button);
+
+            try {
+                const response = await fetch('/api/external');
+                const data = await response.json();
+                showResult('🌐 External API Result', data);
+            } catch (error) {
+                showResult('❌ External API Failed', { error: error.message }, true);
+            } finally {
+                resetButton(button, originalText);
+            }
+        }
+
+        // Show initial status
+        window.onload = function() {
+            document.getElementById('appStatus').innerHTML = `
+                <h3>🎉 Success!</h3>
+                <p>If you can see this page, you've successfully fixed the package integrity issues!</p>
+                <p><strong>Challenge completed!</strong> The application is now running correctly.</p>
+            `;
+        };
+    </script>
+</body>
+</html>
