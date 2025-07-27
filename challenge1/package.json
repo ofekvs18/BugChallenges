@@ -1,7 +1,7 @@
 {
-  "name": "phantom-package-challenge",
+  "name": "phantom-app",
   "version": "1.0.0",
-  "description": "Bug challenge: Package integrity issues",
+  "description": "Bug challenge",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
