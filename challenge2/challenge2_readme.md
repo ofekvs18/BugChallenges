@@ -179,15 +179,6 @@ function safeProcess(obj, visited = new WeakSet()) {
 ```
 </details>
 
-<details>
-<summary>Hint 4: Specific Functions</summary>
-The main problems are in:
-- `processData()` - Generic processor with circular reference bug
-- `processNestedData()` - Nested traversal without cycle detection  
-- `processCircularData()` - Multiple functions that lack protection
-- Utility functions like `countProperties()` and `flattenObject()`
-</details>
-
 ## Success Criteria
 - [ ] All frontend test buttons complete successfully
 - [ ] No API requests hang or timeout

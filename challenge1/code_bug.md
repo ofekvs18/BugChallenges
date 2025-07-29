@@ -71,11 +71,6 @@ The issue is related to package management and dependency installation. Focus on
 Something about the packages doesn't match what npm expects. Check what npm is complaining about during installation.
 </details>
 
-<details>
-<summary>Click for Hint 3 (Strong)</summary>
-The package-lock.json file contains information that doesn't match the actual packages. Look for integrity mismatches.
-</details>
-
 ## Evaluation
 Your solution will be evaluated on:
 - **Correctness**: Does the application work after your fix?
